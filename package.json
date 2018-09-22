@@ -1,0 +1,31 @@
+{
+  "name": "searchmap",
+  "version": "1.0.0",
+  "description": "Find places and Draw on Map using Google Maps API",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/nodemon/bin/nodemon.js index.js"
+  },
+  "author": "Andre Simamora",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.2.15",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.4",
+    "path": "^0.12.7",
+    "pug": "^2.0.3",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}

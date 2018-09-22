@@ -16,8 +16,9 @@ mongoose.connect(config.db.mongoUri, { useNewUrlParser: true }, (err) => {
 });
 
 const auth = require('./controllers/Auth');
+const user = require('./controllers/User');
 const place = require('./controllers/Place');
-// const shape = require('./controllers/Shape');
+const shape = require('./controllers/Shape');
 
 const PORT = process.env.PORT || config.app.port;
 const app = express();
@@ -27,7 +28,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/api/v1/auth', auth);
+app.use('/api/v1/user', user);
 app.use('/api/v1/place', place);
-// app.use('/api/v1/shape', shape);
+app.use('/api/v1/shape', shape);
 
 app.listen(PORT);

@@ -9,15 +9,17 @@ const isAuthenticated = (req, res, next) => {
     jwt.verify(token, config.jwt.secretKey, (err) => {
       if (err) {
         res.status(500).send({
+          status: 500,
           success: false,
           message: 'Token expired',
         });
+      } else {
+        next();
       }
-
-      next();
     });
   } else {
     res.status(500).send({
+      status: 404,
       success: false,
       message: 'No token found',
     });

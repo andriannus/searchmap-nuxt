@@ -8,6 +8,7 @@ const User = require('../models/UserSchema');
 
 router.get('/', (req, res) => {
   res.status(200).send({
+    status: 200,
     success: true,
     message: 'OK',
   });
@@ -20,26 +21,45 @@ router.post('/login', (req, res) => {
   User.findOne({ email })
     .exec((err, user) => {
       if (err) {
-        console.log(err);
+        res.status(500).send({
+          status: 500,
+          success: false,
+          message: err,
+        });
       } else if (!user) {
-        res.status(404).send({
+        res.status(500).send({
+          status: 404,
           success: false,
           message: 'User not found',
         });
       } else {
         user.comparePassword(password, (fault, isMatch) => {
-          if (fault) console.log(fault);
+          if (fault) {
+            res.status(500).send({
+              status: 500,
+              success: false,
+              message: fault,
+            });
+          }
 
           if (!isMatch) {
-            res.status(401).send({
+            res.status(500).send({
+              status: 401,
               success: false,
               message: 'Password not match',
             });
           } else {
-            jwt.sign({ email, password }, config.jwt.secretKey, { expiresIn: '1s' }, (fail, token) => {
-              if (fail) console.log(fail);
+            jwt.sign({ email, password }, config.jwt.secretKey, { expiresIn: '7d' }, (fail, token) => {
+              if (fail) {
+                res.status(500).send({
+                  status: 500,
+                  success: false,
+                  message: fail,
+                });
+              }
 
               res.status(200).send({
+                status: 200,
                 success: true,
                 message: 'Login success',
                 token,
@@ -59,14 +79,79 @@ router.post('/register', (req, res) => {
   });
 
   newUser.save((err, user) => {
-    if (err) console.log(err);
+    if (err) {
+      res.status(500).send({
+        status: 500,
+        success: false,
+        message: err,
+      });
+    }
 
     res.status(201).send({
+      status: 201,
       success: true,
       message: 'User created',
       data: user,
     });
   });
+});
+
+router.post('/checkEmail', (req, res) => {
+  const { email } = req.body;
+
+  User.findOne({ email })
+    .exec((err, success) => {
+      if (err) {
+        res.status(500).send({
+          status: 500,
+          success: false,
+          message: err,
+        });
+      }
+
+      if (!success) {
+        res.status(200).send({
+          status: 200,
+          success: true,
+          message: 'E-mail can be used',
+        });
+      } else {
+        res.status(200).send({
+          status: 500,
+          success: false,
+          message: 'E-mail cannot be used',
+        });
+      }
+    });
+});
+
+router.post('/checkUsername', (req, res) => {
+  const { username } = req.body;
+
+  User.findOne({ username })
+    .exec((err, success) => {
+      if (err) {
+        res.status(500).send({
+          status: 500,
+          success: false,
+          message: err,
+        });
+      }
+
+      if (!success) {
+        res.status(200).send({
+          status: 200,
+          success: true,
+          message: 'Username can be used',
+        });
+      } else {
+        res.status(200).send({
+          status: 500,
+          success: false,
+          message: 'Username cannot be used',
+        });
+      }
+    });
 });
 
 module.exports = router;

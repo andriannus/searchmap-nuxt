@@ -2,9 +2,9 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 const config = require('../configs/config');
+const User = require('../models/UserSchema');
 
 const router = express.Router();
-const User = require('../models/UserSchema');
 
 router.post('/login', (req, res) => {
   const { email } = req.body;
@@ -54,7 +54,7 @@ router.post('/login', (req, res) => {
                   });
                 }
 
-                res.status(200).send({
+                res.status(200).header('Authorization', token).send({
                   status: 200,
                   success: true,
                   message: 'Login successful',

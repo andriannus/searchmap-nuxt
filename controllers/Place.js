@@ -1,9 +1,9 @@
 const express = require('express');
 const _ = require('lodash');
 const auth = require('../middlewares/Authentication');
+const Place = require('../models/PlaceSchema');
 
 const router = express.Router();
-const Place = require('../models/PlaceSchema');
 
 router.get('/', (req, res) => {
   Place.find()

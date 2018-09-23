@@ -1,9 +1,9 @@
 const express = require('express');
+const _ = require('lodash');
 const auth = require('../middlewares/Authentication');
-// const _ = require('lodash');
+const Shape = require('../models/ShapeSchema');
 
 const router = express.Router();
-const Shape = require('../models/ShapeSchema');
 
 router.get('/', (req, res) => {
   Shape.find()
@@ -50,12 +50,29 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', auth.isAuthenticated, (req, res) => {
-  const { name } = req.body;
+  const newShape = new Shape();
 
-  res.status(201).send({
-    status: 201,
-    success: true,
-    place: name,
+  _.forEach(req.body, (value, index) => {
+    newShape[index] = value;
+  });
+
+  newShape.user = '5ba6021d6e0f412756a97715';
+
+  newShape.save((err, shape) => {
+    if (err) {
+      res.status(500).send({
+        status: 500,
+        success: false,
+        message: err,
+      });
+    }
+
+    res.status(201).send({
+      status: 201,
+      success: true,
+      message: 'Shape has been created',
+      data: shape,
+    });
   });
 });
 

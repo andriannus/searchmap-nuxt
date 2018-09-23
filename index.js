@@ -15,17 +15,18 @@ mongoose.connect(config.db.mongoUri, { useNewUrlParser: true }, (err) => {
   }
 });
 
-const auth = require('./controllers/Auth');
-const user = require('./controllers/User');
-const place = require('./controllers/Place');
-const shape = require('./controllers/Shape');
-
 const PORT = process.env.PORT || config.app.port;
 const app = express();
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cors());
+
+// Load Controller files
+const auth = require('./controllers/Auth');
+const user = require('./controllers/User');
+const place = require('./controllers/Place');
+const shape = require('./controllers/Shape');
 
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/user', user);

@@ -6,14 +6,6 @@ const config = require('../configs/config');
 const router = express.Router();
 const User = require('../models/UserSchema');
 
-router.get('/', (req, res) => {
-  res.status(200).send({
-    status: 200,
-    success: true,
-    message: 'OK',
-  });
-});
-
 router.post('/login', (req, res) => {
   const { email } = req.body;
   const { password } = req.body;
@@ -46,25 +38,30 @@ router.post('/login', (req, res) => {
             res.status(500).send({
               status: 401,
               success: false,
-              message: 'Password not match',
+              message: 'Password does not match',
             });
           } else {
-            jwt.sign({ email, password }, config.jwt.secretKey, { expiresIn: '7d' }, (fail, token) => {
-              if (fail) {
-                res.status(500).send({
-                  status: 500,
-                  success: false,
-                  message: fail,
-                });
-              }
+            jwt.sign(
+              { email, password },
+              config.jwt.secretKey,
+              { expiresIn: config.jwt.expiresIn },
+              (fail, token) => {
+                if (fail) {
+                  res.status(500).send({
+                    status: 500,
+                    success: false,
+                    message: fail,
+                  });
+                }
 
-              res.status(200).send({
-                status: 200,
-                success: true,
-                message: 'Login success',
-                token,
-              });
-            });
+                res.status(200).send({
+                  status: 200,
+                  success: true,
+                  message: 'Login successful',
+                  token,
+                });
+              },
+            );
           }
         });
       }
@@ -90,7 +87,7 @@ router.post('/register', (req, res) => {
     res.status(201).send({
       status: 201,
       success: true,
-      message: 'User created',
+      message: 'Successful registration',
       data: user,
     });
   });

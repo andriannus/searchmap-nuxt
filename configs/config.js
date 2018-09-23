@@ -7,6 +7,7 @@ const config = {
   },
   jwt: {
     secretKey: 'C0b4d1b4c4.',
+    expiresIn: '7d',
   },
 };
 

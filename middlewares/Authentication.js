@@ -21,7 +21,7 @@ const isAuthenticated = (req, res, next) => {
     res.status(500).send({
       status: 404,
       success: false,
-      message: 'No token found',
+      message: 'Token not found',
     });
   }
 };

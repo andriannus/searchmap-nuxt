@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
         res.status(200).send({
           status: 200,
           success: true,
-          message: 'List of Shapes',
+          message: 'Get a list of shapes',
           data: shapes,
         });
       }
@@ -43,7 +43,7 @@ router.get('/:id', (req, res) => {
       res.status(200).send({
         status: 200,
         success: true,
-        message: 'Get shape',
+        message: 'Get a shape',
         data: shape,
       });
     });

@@ -21,7 +21,7 @@ router.get('/:id/places', (req, res) => {
         res.status(200).send({
           status: 200,
           success: true,
-          message: 'Get list places',
+          message: 'Get a list of places from user',
           data: places,
         });
       }
@@ -43,7 +43,7 @@ router.get('/:id/shapes', (req, res) => {
         res.status(200).send({
           status: 200,
           success: true,
-          message: 'Get list shapes',
+          message: 'Get a list of shapes from user',
           data: shapes,
         });
       }

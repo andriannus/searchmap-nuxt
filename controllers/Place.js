@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
         res.status(200).send({
           status: 200,
           success: true,
-          message: 'List of places',
+          message: 'Get a list of places',
           data: places,
         });
       }
@@ -42,7 +42,7 @@ router.get('/:id', (req, res) => {
         res.status(200).send({
           status: 200,
           success: true,
-          message: 'Get place',
+          message: 'Get a place',
           data: place,
         });
       }
@@ -70,7 +70,7 @@ router.post('/', auth.isAuthenticated, (req, res) => {
     res.status(201).send({
       status: 201,
       success: true,
-      message: 'Place created',
+      message: 'Place has been created',
       data: place,
     });
   });

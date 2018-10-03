@@ -28,3 +28,11 @@
     </v-flex>
   </v-layout>
 </template>
+
+<script>
+export default {
+  head: () => ({
+    title: 'Welcome to Search Map'
+  })
+}
+</script>

@@ -13,12 +13,8 @@ module.exports = {
     'vue'
   ],
   // add your custom rules here
-  rules: {
-    // don't require .vue extension when importing
-    'import/extensions': ['error', 'always', {
-      js: 'never',
-      vue: 'never'
-    }],
-  },
-  globals: {}
+  rules: {},
+  globals: {
+    google: false
+  }
 }

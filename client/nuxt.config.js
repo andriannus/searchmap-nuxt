@@ -1,20 +1,22 @@
 const nodeExternals = require('webpack-node-externals')
-const resolve = (dir) => require('path').join(__dirname, dir)
 
 module.exports = {
   /*
   ** Headers of the page
   */
   head: {
-    title: 'client',
+    title: 'Search Map',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js + Vuetify.js project' }
+      { hid: 'description', name: 'description', content: 'Find places and Draw on Map using Google Maps API' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
+    ],
+    script: [
+      { src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAxKgsokHk4bQVwrgzqOqRvZUIEx2ybCQ8&libraries=places,drawing' }
     ]
   },
   plugins: ['~/plugins/vuetify.js'],
@@ -24,21 +26,11 @@ module.exports = {
   /*
   ** Customize the progress bar color
   */
-  loading: { color: '#3B8070' },
+  loading: { color: '#363636' },
   /*
   ** Build configuration
   */
   build: {
-    babel: {
-      plugins: [
-        ["transform-imports", {
-          "vuetify": {
-            "transform": "vuetify/es5/components/${member}",
-            "preventFullImport": true
-          }
-        }]
-      ]
-    },
     vendor: [
       '~/plugins/vuetify.js'
     ],

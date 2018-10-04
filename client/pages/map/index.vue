@@ -1,20 +1,21 @@
 <template>
   <div>
-    <v-card ref="mapCard" v-if="visibleCard">
-      <v-card-text>
-        <v-text-field
-          label="Search here.."
-          prepend-icon="place"
-          ref="mapInput"
-        ></v-text-field>
-      </v-card-text>
-      <v-divider></v-divider>
-      <v-card-actions>
-        <v-btn flat color="primary" to="/">Home</v-btn>
-        <v-btn flat color="primary" to="/guest/place">Guest Book</v-btn>
-      </v-card-actions>
-    </v-card>
-
+    <div ref="mapCard" v-show="visibleCard" class="card-map">
+      <v-card>
+        <v-card-title>
+          <h3 class="title">Search here..</h3>
+        </v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+          <input type="text" class="card-input" ref="mapInput">
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-btn flat color="primary" to="/">Home</v-btn>
+          <v-btn flat color="primary" to="/guest/place">Guest Book</v-btn>
+        </v-card-actions>
+      </v-card>
+    </div>
     <div id="map" ref="map" style="height: 100vh;"></div>
   </div>
 </template>
@@ -61,3 +62,17 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.card-map {
+  margin: 5px 0 0 5px;
+}
+
+.card-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+}
+</style>
